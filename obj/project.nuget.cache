@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "L742zt7pnVqAP+q9kH3jNNAH8QGqumUXxx41O/BQkvlx37ogNpsgCDN/UTjt7Ny5ccwS/3dA25/BSQlbSo/D5w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\nwoko\\OneDrive - BYU-Idaho\\Desktop\\OnWard\\OnWard.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nwoko\\.nuget\\packages\\raylib-cs\\4.0.0.1\\raylib-cs.4.0.0.1.nupkg.sha512",
+    "C:\\Users\\nwoko\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
