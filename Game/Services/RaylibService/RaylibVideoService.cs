@@ -137,7 +137,10 @@ namespace OnWard.Game.Services.RaylibService
             image.UpdateImageMotion();
             float imageMotion = image.GetImageMotion();
 
-            if (imageMotion <= -texture.width*2) image.ZeroImageMotion();
+            if (imageMotion <= -texture.width*2)
+            {
+                image.ZeroImageMotion();
+            }
         }
 
         /// </inheritdoc>

@@ -100,11 +100,11 @@ namespace OnWard
         // BACKGROUND
         public static string BACKGROUND_GROUP = "motion_background";
         public static string BACKGROUND_IMAGE = "Assets/Images/background.png";
-        public static float BACKGROUND_IMAGE_SCROLLRATE = 0.1f;
+        public static float BACKGROUND_IMAGE_SCROLLRATE = 0.5f;
         public static string MIDGROUND_IMAGE = "Assets/Images/midground.png";
-        public static float MIDGROUND_IMAGE_SCROLLRATE = 0.5f;
+        public static float MIDGROUND_IMAGE_SCROLLRATE = 1.0f;
         public static string FOREGROUND_IMAGE = "Assets/Images/foreground.png";
-        public static float FOREGROUND_IMAGE_SCROLLRATE = 1.0f;
+        public static float FOREGROUND_IMAGE_SCROLLRATE = 2.0f;
         public static int BACKGROUND_IMAGE_WIDTH = 800;
         public static int BACKGROUND_IMAGE_HEIGHT = 450;
 
@@ -190,7 +190,7 @@ namespace OnWard
         // DIALOG
         public static string DIALOG_GROUP = "dialogs";
         public static string ENTER_TO_START = "PRESS ENTER TO START";
-        public static string PREP_TO_LAUNCH = "PREPARING TO LAUNCH";
+        public static string PREP_TO_LAUNCH = "GET READY TO RUN";
         public static string WAS_GOOD_GAME = "GAME OVER";
 
     }

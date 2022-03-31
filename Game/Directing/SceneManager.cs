@@ -46,12 +46,12 @@ namespace OnWard.Game.Directing
         {
             AddBackground(cast);
             AddStats(cast);
-            // AddLevel(cast);
+            AddLevel(cast);
             AddScore(cast);
-            // AddLives(cast);
-            // AddBall(cast);
-            // AddBricks(cast);
-            // AddRacket(cast);
+            AddLives(cast);
+            AddBall(cast);
+            AddBricks(cast);
+            AddRacket(cast);
             AddDialog(cast, Constants.ENTER_TO_START);
 
             script.ClearAllActions();
@@ -75,9 +75,9 @@ namespace OnWard.Game.Directing
         private void PrepareNextLevel(Cast cast, Script script)
         {
             AddBackground(cast);
-            // AddBall(cast);
-            // AddBricks(cast);
-            // AddRacket(cast);
+            AddBall(cast);
+            AddBricks(cast);
+            AddRacket(cast);
             AddDialog(cast, Constants.PREP_TO_LAUNCH);
 
             script.ClearAllActions();
@@ -94,8 +94,8 @@ namespace OnWard.Game.Directing
         private void PrepareTryAgain(Cast cast, Script script)
         {
             AddBackground(cast);
-            // AddBall(cast);
-            // AddRacket(cast);
+            AddBall(cast);
+            AddRacket(cast);
             AddDialog(cast, Constants.PREP_TO_LAUNCH);
 
             script.ClearAllActions();
@@ -109,7 +109,7 @@ namespace OnWard.Game.Directing
 
         private void PrepareInPlay(Cast cast, Script script)
         {
-            // ActivateBall(cast);
+            ActivateBall(cast);
             cast.ClearActors(Constants.DIALOG_GROUP);
 
             script.ClearAllActions();
@@ -125,8 +125,8 @@ namespace OnWard.Game.Directing
         private void PrepareGameOver(Cast cast, Script script)
         {
             AddBackground(cast);
-            // AddBall(cast);
-            // AddRacket(cast);
+            AddBall(cast);
+            AddRacket(cast);
             AddDialog(cast, Constants.WAS_GOOD_GAME);
 
             script.ClearAllActions();
@@ -314,9 +314,9 @@ namespace OnWard.Game.Directing
         private void AddOutputActions(Script script)
         {
             script.AddAction(Constants.OUTPUT, new StartDrawingAction(VideoService));
-            // script.AddAction(Constants.OUTPUT, new DrawHudAction(VideoService));
-            script.AddAction(Constants.OUTPUT, new DrawDialogAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawBackgroundAction(VideoService));
+            script.AddAction(Constants.OUTPUT, new DrawDialogAction(VideoService));
+            // script.AddAction(Constants.OUTPUT, new DrawHudAction(VideoService));
             // script.AddAction(Constants.OUTPUT, new DrawBallAction(VideoService));
             // script.AddAction(Constants.OUTPUT, new DrawBricksAction(VideoService));
             // script.AddAction(Constants.OUTPUT, new DrawRacketAction(VideoService));
@@ -330,8 +330,7 @@ namespace OnWard.Game.Directing
 
         private void AddReleaseActions(Script script)
         {
-            script.AddAction(Constants.RELEASE, new ReleaseDevicesAction(AudioService, 
-                VideoService));
+            script.AddAction(Constants.RELEASE, new ReleaseDevicesAction(AudioService, VideoService));
         }
 
         private void AddUpdateActions(Script script)
@@ -339,7 +338,7 @@ namespace OnWard.Game.Directing
             script.AddAction(Constants.UPDATE, new UpdateBackgroundAction(VideoService));
             // script.AddAction(Constants.UPDATE, new MoveBallAction());
             // script.AddAction(Constants.UPDATE, new MoveRacketAction());
-            // script.AddAction(Constants.UPDATE, new CollideBordersAction(PhysicsService, AudioService));
+            script.AddAction(Constants.UPDATE, new CollideBordersAction(PhysicsService, AudioService));
             // script.AddAction(Constants.UPDATE, new CollideBrickAction(PhysicsService, AudioService));
             // script.AddAction(Constants.UPDATE, new CollideRacketAction(PhysicsService, AudioService));
             script.AddAction(Constants.UPDATE, new CheckOverAction());
