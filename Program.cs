@@ -47,6 +47,11 @@ namespace OnWard
 
             cast.AddActor("player", player);
 
+            Sound sound = new Sound("Assets/Sounds/background_music.wav");
+            Music music = new Music(sound);
+
+            cast.AddActor("music", music);
+
             // create the actions
             Script script = new Script();
 
@@ -62,6 +67,7 @@ namespace OnWard
             script.AddAction(Constants.OUTPUT, new DrawBackgroundAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawPlayerAction(VideoService));
             script.AddAction(Constants.OUTPUT, new EndDrawingAction(VideoService));
+            script.AddAction(Constants.OUTPUT, new PlayMusicAction(AudioService));
 
             script.AddAction(Constants.UNLOAD, new UnloadAssetsAction(AudioService, VideoService));
             script.AddAction(Constants.RELEASE, new ReleaseDevicesAction(AudioService, VideoService));
