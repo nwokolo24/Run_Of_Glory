@@ -24,13 +24,6 @@ namespace OnWard.Game.Services
         void DrawImageEx(Image image);
 
         /// <summary>
-        /// Updates the background imageMotion
-        /// </summary>
-        /// <param name="image">The given image.</param>
-        void UpdateBackgroundMotion(Image image);
-
-
-        /// <summary>
         /// Draws a rectangle at the given position.
         /// </summary>
         /// <param name="size">The given size.</param>

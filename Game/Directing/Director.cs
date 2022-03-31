@@ -11,7 +11,6 @@ namespace OnWard.Game.Directing
     {
         private Cast cast;
         private Script script;
-        private SceneManager sceneManager;
         private VideoService videoService;
         
         /// <summary>
@@ -23,21 +22,22 @@ namespace OnWard.Game.Directing
             this.videoService = videoService;
             this.cast = new Cast();
             this.script = new Script();
-            this.sceneManager = new SceneManager();
         }
 
         /// </inheritdoc>
         public void OnNext(string scene)
         {
-            sceneManager.PrepareScene(scene, cast, script);
+            // sceneManager.PrepareScene(scene, cast, script);
         }
         
         /// <summary>
         /// Starts the game by running the main game loop for the given cast and script.
         /// </summary>
-        public void StartGame()
+        public void StartGame(Cast cast, Script script)
         {
-            OnNext(Constants.NEW_GAME);
+            this.cast = cast;
+            this.script = script;
+            
             ExecuteActions(Constants.INITIALIZE);
             ExecuteActions(Constants.LOAD);
             while (videoService.IsWindowOpen())

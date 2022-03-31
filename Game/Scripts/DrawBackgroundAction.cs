@@ -13,7 +13,14 @@ namespace OnWard.Game.Scripts
 
         public void Execute(Cast cast, Script script, ActionCallback callback)
         {
-            List<Actor> backgroundImages = cast.GetActors(Constants.BACKGROUND_GROUP);
+            DrawBackground("background", cast);
+            DrawBackground("midground", cast);
+            DrawBackground("foreground", cast);
+        }
+
+        private void DrawBackground(string group, Cast cast)
+        {
+            List<Actor> backgroundImages = cast.GetActors(group);
             foreach (Image image in backgroundImages)
             {
                 videoService.DrawImageEx(image);

@@ -56,9 +56,16 @@ namespace OnWard.Game.Services.RaylibService
                 textures[filename] = loaded;
             }
             Raylib_cs.Texture2D texture = textures[filename];
-            float imageMotion = image.GetImageMotion();
-            Raylib.DrawTextureEx(texture, new Vector2(imageMotion, 10), 0.0f, 2.0f, Raylib_cs.Color.WHITE);
-            Raylib.DrawTextureEx(texture, new Vector2(texture.width*2 + imageMotion, 10), 0.0f, 2.0f, Raylib_cs.Color.WHITE);
+            int x = image.GetPosition().GetX();
+            int y = image.GetPosition().GetY();
+            Vector2 position = new Vector2(x, y);
+            double scale = image.GetScale();
+            double rotation = image.GetRotation();
+            Raylib.DrawTextureEx(texture, position, (float)rotation, (float)scale, Raylib_cs.Color.WHITE);
+
+            // float imageMotion = image.GetImageMotion();
+            // Raylib.DrawTextureEx(texture, new Vector2(imageMotion, 10), 0.0f, 2.0f, Raylib_cs.Color.WHITE);
+            // Raylib.DrawTextureEx(texture, new Vector2(texture.width*2 + imageMotion, 10), 0.0f, 2.0f, Raylib_cs.Color.WHITE);
         }
 
         /// </inheritdoc>
@@ -122,25 +129,6 @@ namespace OnWard.Game.Services.RaylibService
         public bool IsWindowOpen()
         {
             return !Raylib.WindowShouldClose();
-        }
-
-        // This method helps with the motion of the the background
-        public void UpdateBackgroundMotion(Casting.Image image)
-        {
-            string filename = image.GetFilename();
-            if (!textures.ContainsKey(filename))
-            {
-                Raylib_cs.Texture2D loaded = Raylib.LoadTexture(filename);
-                textures[filename] = loaded;
-            }
-            Raylib_cs.Texture2D texture = textures[filename];
-            image.UpdateImageMotion();
-            float imageMotion = image.GetImageMotion();
-
-            if (imageMotion <= -texture.width*2)
-            {
-                image.ZeroImageMotion();
-            }
         }
 
         /// </inheritdoc>

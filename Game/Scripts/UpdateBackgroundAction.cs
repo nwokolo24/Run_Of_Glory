@@ -6,18 +6,30 @@ namespace OnWard.Game.Scripts
 {
     public class UpdateBackgroundAction : Action
     {
-        VideoService videoService;
-        public UpdateBackgroundAction(VideoService videoService)
+        
+        public UpdateBackgroundAction()
         {
-            this.videoService = videoService;
         }
 
         public void Execute(Cast cast, Script script, ActionCallback callback)
         {
-            List<Actor> backgroundImages = cast.GetActors(Constants.BACKGROUND_GROUP);
-            foreach (Image image in backgroundImages)
+            MoveBackgrounds("background", cast);
+            MoveBackgrounds("midground", cast);
+            MoveBackgrounds("foreground", cast);
+        }
+
+        private void MoveBackgrounds(string group, Cast cast)
+        {
+            List<Actor> backgrounds = cast.GetActors(group);
+            foreach (Actor actor in backgrounds)
             {
-                this.videoService.UpdateBackgroundMotion(image);
+                Image image = (Image)actor;
+                image.Move();
+                if (image.GetPosition().GetX() <= -1600)
+                {
+                    Point newPosition = new Point(1600, 0);
+                    image.SetPosition(newPosition);
+                }
             }
         }
     }

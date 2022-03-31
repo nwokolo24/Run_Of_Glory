@@ -61,11 +61,10 @@ namespace OnWard.Game.Casting
         /// Gets the next image in the animation to display.
         /// </summary>
         /// <returns>The next image.</returns>
-        public Image NextImage()
+        public string NextImage()
         {
             string filename = images[index];
-            Image image = new Image(filename);
-
+            
             DateTime currentTime = DateTime.Now;
             TimeSpan elapsedTime = currentTime.Subtract(startTime);
 
@@ -78,15 +77,14 @@ namespace OnWard.Game.Casting
                     frame = 0;
                 }
                 filename = images[index];
-                image = new Image(filename);
-
+                
                 if (index >= images.Count - 1)
                 {
                     startTime = currentTime;
                 }
             }
 
-            return image; 
+            return filename; 
         }
     }
 }

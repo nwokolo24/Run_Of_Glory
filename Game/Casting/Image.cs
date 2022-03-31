@@ -13,18 +13,22 @@ namespace OnWard.Game.Casting
         private string filename;
         private double scale;
         private int rotation;
-        private float imageMotion = 0.0f;
+        private Point velocity;
         private float scrollRate;
+        private Point size;
+        private Point position;
 
         /// <summary>
         /// Constructs a new instance of Image.
         /// </summary>
-        public Image(string filename, float scrollRate = 0.0f, double scale = 1.0, int rotation = 0, bool debug = false) : base(debug)
+        public Image(string filename, Point size, Point position, Point velocity, double scale = 1.0, int rotation = 0, bool debug = false) : base(debug)
         {
             this.filename = filename;
             this.scale = scale;
             this.rotation = rotation;
-            this.scrollRate = scrollRate;
+            this.velocity = velocity;
+            this.size = size;
+            this.position = position;
         }
 
         /// <summary>
@@ -45,6 +49,17 @@ namespace OnWard.Game.Casting
             return scale;
         }
 
+        public Point GetPosition()
+        {
+            return position;
+        }
+
+        public Point GetSize()
+        {
+            return size;
+        }
+
+
         /// <summary>
         /// Gets the rotation.
         /// </summary>
@@ -54,23 +69,13 @@ namespace OnWard.Game.Casting
             return rotation;
         }
 
-
-        /// <summary>
-        /// Gets the imageMotion.
-        /// </summary>
-        /// <returns>The imageMotion.</returns>
-         public float GetImageMotion()
-        {
-            return this.imageMotion;
-        }
-
         /// <summary>
         /// Gets the scrollRate.
         /// </summary>
         /// <returns>The scrollRate.</returns>
-         public float GetScrollRate()
+         public Point GetVelocity()
         {
-            return this.scrollRate;
+            return this.velocity;
         }
 
         /// <summary>
@@ -86,18 +91,24 @@ namespace OnWard.Game.Casting
         /// Updates the imageMotion value by the scrollRate provided.
         /// </summary>
         /// <returns>The imageMotion</returns>
-        public void UpdateImageMotion()
+        public void Move()
         {
-            this.imageMotion -= this.scrollRate;
+            this.position = this.position.Add(this.velocity);
         }
         
         /// <summary>
         /// Set the imageMotion value to 0.
         /// </summary>
-        public void ZeroImageMotion()
+        public void StopMoving()
         {
-            this.imageMotion = 0.0f;
+            this.velocity = new Point(0, 0);
         }
+        
+        public void SetPosition(Point position)
+        {
+            this.position = position;
+        }
+        
 
         /// <summary>
         /// Sets the scale to the given value.
