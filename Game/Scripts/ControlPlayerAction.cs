@@ -18,7 +18,7 @@ namespace OnWard.Game.Scripts
             Player player = (Player)cast.GetFirstActor("player");
             if (keyboardService.IsKeyDown("space"))
             {
-                Point newVelocity = new Point(0, -25);
+                Point newVelocity = new Point(0, -20);
                 player.body.SetVelocity(newVelocity);
             }
         }

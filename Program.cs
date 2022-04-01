@@ -22,16 +22,17 @@ namespace OnWard
         static void Main(string[] args)
         {
 
-             // create the actors
+             // create the cast
             Cast cast = new Cast();
 
+            // Create the background images
             Image backgroundImage = new Image(Constants.BACKGROUND_IMAGE, new Point(800, 450), new Point(0, 0), new Point(-1, 0), 2.0);
             Image midgroundImage = new Image(Constants.MIDGROUND_IMAGE, new Point(800, 450), new Point(0, 0), new Point(-2, 0), 2.0);
-            Image foregroundImage = new Image(Constants.FOREGROUND_IMAGE, new Point(800, 450), new Point(0, 0), new Point(-3, 0), 2.0);
+            Image foregroundImage = new Image(Constants.FOREGROUND_IMAGE, new Point(800, 450), new Point(0, 0), new Point(-4, 0), 2.0);
             
             Image backgroundImage2 = new Image(Constants.BACKGROUND_IMAGE, new Point(800, 450), new Point(1600, 0), new Point(-1, 0), 2.0);
             Image midgroundImage2 = new Image(Constants.MIDGROUND_IMAGE, new Point(800, 450), new Point(1600, 0), new Point(-2, 0), 2.0);
-            Image foregroundImage2 = new Image(Constants.FOREGROUND_IMAGE, new Point(800, 450), new Point(1600, 0), new Point(-3, 0), 2.0);
+            Image foregroundImage2 = new Image(Constants.FOREGROUND_IMAGE, new Point(800, 450), new Point(1600, 0), new Point(-4, 0), 2.0);
 
             cast.AddActor("background", backgroundImage);
             cast.AddActor("midground", midgroundImage);
@@ -41,7 +42,7 @@ namespace OnWard
             cast.AddActor("midground", midgroundImage2);
             cast.AddActor("foreground", foregroundImage2);
 
-            Body body = new Body(new Point(700, 700), new Point(80, 120), new Point(0, 0));
+            Body body = new Body(new Point(350, 100), new Point(80, 120), new Point(0, 0));
             Animation animation = new Animation(new List<string>() { "Assets/Images/player_walk1.png", "Assets/Images/player_walk2.png" }, 10, 0);
             Player player = new Player(body, animation);
 
@@ -56,18 +57,18 @@ namespace OnWard
             Script script = new Script();
 
             script.AddAction(Constants.INITIALIZE, new InitializeDevicesAction(AudioService, VideoService));
-            script.AddAction(Constants.LOAD, new LoadAssetsAction(AudioService, VideoService));
+            // script.AddAction(Constants.LOAD, new LoadAssetsAction(AudioService, VideoService));
             
             script.AddAction(Constants.INPUT, new ControlPlayerAction(KeyboardService));
             
             script.AddAction(Constants.UPDATE, new UpdateBackgroundAction());
             script.AddAction(Constants.UPDATE, new MovePlayerAction());
             
+            script.AddAction(Constants.OUTPUT, new PlayMusicAction(AudioService));
             script.AddAction(Constants.OUTPUT, new StartDrawingAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawBackgroundAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawPlayerAction(VideoService));
             script.AddAction(Constants.OUTPUT, new EndDrawingAction(VideoService));
-            script.AddAction(Constants.OUTPUT, new PlayMusicAction(AudioService));
 
             script.AddAction(Constants.UNLOAD, new UnloadAssetsAction(AudioService, VideoService));
             script.AddAction(Constants.RELEASE, new ReleaseDevicesAction(AudioService, VideoService));
