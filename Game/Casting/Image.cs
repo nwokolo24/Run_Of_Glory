@@ -14,7 +14,6 @@ namespace OnWard.Game.Casting
         private double scale;
         private int rotation;
         private Point velocity;
-        private float scrollRate;
         private Point size;
         private Point position;
 
@@ -70,9 +69,9 @@ namespace OnWard.Game.Casting
         }
 
         /// <summary>
-        /// Gets the scrollRate.
+        /// Gets the velocity.
         /// </summary>
-        /// <returns>The scrollRate.</returns>
+        /// <returns>The velocity.</returns>
          public Point GetVelocity()
         {
             return this.velocity;
@@ -88,7 +87,7 @@ namespace OnWard.Game.Casting
         }
 
         /// <summary>
-        /// Updates the imageMotion value by the scrollRate provided.
+        /// Updates the imageMotion value by the velocity provided.
         /// </summary>
         /// <returns>The imageMotion</returns>
         public void Move()

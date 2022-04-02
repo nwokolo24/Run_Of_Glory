@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using OnWard.Game.Casting;
 using OnWard.Game.Directing;
 using OnWard.Game.Scripts;
@@ -18,6 +14,8 @@ namespace OnWard
         public static PhysicsService PhysicsService = new RaylibPhysicsService();
         public static VideoService VideoService = new RaylibVideoService(Constants.GAME_NAME,
             Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, Constants.BLACK);
+        private static Point obstaclePosition = new Point(1600, 700);
+        private static Point obstacleSize = new Point(64, 64);
 
         static void Main(string[] args)
         {
@@ -42,13 +40,21 @@ namespace OnWard
             cast.AddActor("midground", midgroundImage2);
             cast.AddActor("foreground", foregroundImage2);
 
-            Body body = new Body(new Point(350, 100), new Point(80, 120), new Point(0, 0));
+            Obstacle positive = new Obstacle("Assets/Images/gift_box.png", obstacleSize, new Point(0, 700), new Point(-3, 0));
+            Obstacle positive2 = new Obstacle("Assets/Images/gift_box.png", obstacleSize, obstaclePosition, new Point(-3, 0));
+            // Obstacle negative = new Obstacle("Assets/Images/fire.png", obstacleSize, obstaclePosition, new Point(-3, 0));
+
+            cast.AddActor("obstacles", positive);
+            cast.AddActor("obstacles", positive2);
+            // cast.AddActor("obstacles", negative);
+
+            Body body = new Body(new Point(350, 100), new Point(60, 90), new Point(0, 0));
             Animation animation = new Animation(new List<string>() { "Assets/Images/player_walk1.png", "Assets/Images/player_walk2.png" }, 10, 0);
             Player player = new Player(body, animation);
 
             cast.AddActor("player", player);
 
-            Sound sound = new Sound("Assets/Sounds/background_music.wav");
+            Sound sound = new Sound("Assets/Sounds/mr_clown.mp3");
             Music music = new Music(sound);
 
             cast.AddActor("music", music);
@@ -57,16 +63,18 @@ namespace OnWard
             Script script = new Script();
 
             script.AddAction(Constants.INITIALIZE, new InitializeDevicesAction(AudioService, VideoService));
-            // script.AddAction(Constants.LOAD, new LoadAssetsAction(AudioService, VideoService));
+            script.AddAction(Constants.LOAD, new LoadAssetsAction(AudioService, VideoService));
             
             script.AddAction(Constants.INPUT, new ControlPlayerAction(KeyboardService));
             
             script.AddAction(Constants.UPDATE, new UpdateBackgroundAction());
+            script.AddAction(Constants.UPDATE, new UpdateObstacleAction());
             script.AddAction(Constants.UPDATE, new MovePlayerAction());
             
             script.AddAction(Constants.OUTPUT, new PlayMusicAction(AudioService));
             script.AddAction(Constants.OUTPUT, new StartDrawingAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawBackgroundAction(VideoService));
+            script.AddAction(Constants.OUTPUT, new DrawObstacleAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawPlayerAction(VideoService));
             script.AddAction(Constants.OUTPUT, new EndDrawingAction(VideoService));
 

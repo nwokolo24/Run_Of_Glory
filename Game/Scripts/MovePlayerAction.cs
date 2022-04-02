@@ -21,10 +21,10 @@ namespace OnWard.Game.Scripts
             Point newPosition = player.body.GetPosition().Add(newVelocity);
             player.body.SetPosition(newPosition);
 
-            if (player.body.GetPosition().GetY() > 700)
+            if (player.body.GetPosition().GetY() > 660)
             {
                 int x = player.body.GetPosition().GetX();
-                int y = 700;
+                int y = 660;
                 Point position = new Point(x, y);
                 player.body.SetPosition(position);
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace OnWard.Game.Casting
 {
     /// <summary>
-    /// An image.
+    /// A Player
     /// </summary>
     public class Player : Actor
     {

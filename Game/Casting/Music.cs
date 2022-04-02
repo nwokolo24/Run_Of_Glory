@@ -14,7 +14,7 @@ namespace OnWard.Game.Casting
         /// </summary>
         public Music(Sound sound) : base(false)
         {
-            this.sound = sound;
+            this.sound = sound; 
         }
 
     }
