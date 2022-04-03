@@ -5,14 +5,18 @@ using System.Threading.Tasks;
 
 namespace OnWard.Game.Casting
 {
-    public class Obstacle : Image
+    public class Obstacle : Actor
     {
+        public Body body;
+        public Animation animation;
         private int value;
 
         // Constructor
-        public Obstacle(string filename, int value, Point size, Point position, Point velocity, double scale = 1, int rotation = 0, bool debug = false) : base(filename, size, position, velocity, scale, rotation, debug)
+        public Obstacle(Body body, Animation animation, int value, bool debug = false) : base(debug)
         {
             this.value = value;
+            this.body = body;
+            this.animation = animation;
         }
 
         // Return the value of the obstacle

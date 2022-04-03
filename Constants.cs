@@ -32,6 +32,10 @@ namespace OnWard
         public static string FONT_FILE = "Assets/Fonts/zorque.otf";
         public static int FONT_SIZE = 32;
 
+        // SOUND
+        public static string COLLIDE_SOUND = "Assets/Sounds/score-interface.wav";
+        public static string JUMP_SOUND = "Assets/Sounds/jump.wav";
+
         // TEXT
         public static int ALIGN_LEFT = 0;
         public static int ALIGN_CENTER = 1;

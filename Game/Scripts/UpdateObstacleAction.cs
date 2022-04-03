@@ -23,33 +23,36 @@ namespace OnWard.Game.Scripts
             List<Actor> obstacles = cast.GetActors(group);
             foreach (Actor actor in obstacles)
             {
-                Image image = (Image)actor;
+                Obstacle obstacle = (Obstacle)actor;
 
-                image.Move();
+                Point newVelocity = obstacle.body.GetVelocity();
+                obstacle.body.SetVelocity(newVelocity);
 
-                if (image.GetPosition().GetX() <= -0)
+                Point firstPosition = obstacle.body.GetPosition().Add(newVelocity);
+                obstacle.body.SetPosition(firstPosition);
+
+                if (obstacle.body.GetPosition().GetX() < 0)
                 {
-                    if (image.GetFilename() == "Assets/Images/magic_box.png")
+                    if (obstacle.animation.GetFilename() == "Assets/Images/magic_box.png")
                     {
                         Point newPosition = new Point(random.Next(1800, 2100), random.Next(200, 700));
-                        image.SetPosition(newPosition);
+                        obstacle.body.SetPosition(newPosition);
                     }
-                    else if (image.GetFilename() == "Assets/Images/santa.png")
+                    else if (obstacle.animation.GetFilename() == "Assets/Images/santa.png")
                     {
                         Point newPosition = new Point(random.Next(1700, 1900), random.Next(500, 700));
-                        image.SetPosition(newPosition);
+                        obstacle.body.SetPosition(newPosition);
                     }
-                    else if (image.GetFilename() == "Assets/Images/gift_box.png")
+                    else if (obstacle.animation.GetFilename() == "Assets/Images/gift_box.png")
                     {
                         Point newPosition = new Point(random.Next(1650, 1850), random.Next(450, 700));
-                        image.SetPosition(newPosition);
+                        obstacle.body.SetPosition(newPosition);
                     }
                     else
                     {
                         Point newPosition = new Point(random.Next(1600, 3000), 700);
-                        image.SetPosition(newPosition);
+                        obstacle.body.SetPosition(newPosition);
                     }
-                    
                 }
             }
         }

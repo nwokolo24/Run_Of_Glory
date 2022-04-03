@@ -43,18 +43,63 @@ namespace OnWard
 
 
             // Create Obstacles
-            int randNum = random.Next(1700, 2500);
-            Obstacle loveBox = new Obstacle("Assets/Images/gift_box.png", 50, obstacleSize, new Point(1600, 700), new Point(-3, 0));
-            Obstacle fire = new Obstacle("Assets/Images/fire.png", -30, obstacleSize, new Point(1900, 700), new Point(-3, 0));
-            Obstacle santa = new Obstacle("Assets/Images/santa.png", 70, obstacleSize, new Point(2300, 450), new Point(-3, 0));
-            Obstacle magic_box = new Obstacle("Assets/Images/magic_box.png", 100, obstacleSize, new Point(2700, 500), new Point(-3, 0));
-            Obstacle danger = new Obstacle("Assets/Images/danger.png", 100, obstacleSize, new Point(3000, 700), new Point(-3, 0));
-            // Adde obstacles to cast
+            // Gift Box Obstacle
+            Body giftBody = new Body(new Point(1600, 700), obstacleSize, new Point(-3, 0));
+            Animation giftAnimation = 
+            new Animation(new List<string>() 
+                { 
+                    "Assets/Images/gift_box.png",
+                    "Assets/Images/gift_box.png" 
+                }, 10, 0);
+            Obstacle loveBox = new Obstacle(giftBody, giftAnimation, 50);
             cast.AddActor("obstacles", loveBox);
-            cast.AddActor("obstacles", fire);
+
+            // Santa Obstacle
+            Body santaBody = new Body(new Point(2000, 450), obstacleSize, new Point(-3, 0));
+            Animation santaAnimation = 
+            new Animation(new List<string>() 
+                { 
+                    "Assets/Images/santa.png",
+                    "Assets/Images/santa1.png",
+                    "Assets/Images/santa2.png" 
+                }, 10, 0);
+            Obstacle santa = new Obstacle(santaBody, santaAnimation, 70);
             cast.AddActor("obstacles", santa);
-            cast.AddActor("obstacles", magic_box);
+
+            // Magic Box Obstacle
+            Body magicBoxBody = new Body(new Point(2300, 500), obstacleSize, new Point(-3, 0));
+            Animation magicBoxAnimation = 
+            new Animation(new List<string>() 
+                { 
+                    "Assets/Images/magic_box.png",
+                    "Assets/Images/magic_box.png" 
+                }, 10, 0);
+            Obstacle magicBox = new Obstacle(magicBoxBody, magicBoxAnimation, 100);
+            cast.AddActor("obstacles", magicBox);
+            
+            //Danger Obstacle
+            Body dangerBody = new Body(new Point(2500, 700), obstacleSize, new Point(-3, 0));
+            Animation dangerAnimation = 
+            new Animation(new List<string>() 
+                { 
+                    "Assets/Images/danger.png",
+                    "Assets/Images/danger.png" 
+                }, 10, 0);
+            Obstacle danger = new Obstacle(dangerBody, dangerAnimation, -40);
             cast.AddActor("obstacles", danger);
+
+            //Fire Obstacle
+            Body fireBody = new Body(new Point(2900, 700), obstacleSize, new Point(-3, 0));
+            Animation fireAnimation = 
+            new Animation(new List<string>() 
+                { 
+                    "Assets/Images/evil1.png",
+                    "Assets/Images/evil2.png", 
+                    "Assets/Images/evil3.png",
+                    "Assets/Images/evil4.png" 
+                }, 10, 0);
+            Obstacle fire = new Obstacle(fireBody, fireAnimation, -20);
+            cast.AddActor("obstacles", fire);
 
             // Create and add Player to cast
             Body body = new Body(new Point(350, 100), new Point(60, 90), new Point(0, 0));
@@ -69,17 +114,17 @@ namespace OnWard
             cast.AddActor("player", player);
 
             // Create and add Background musice to cast
-            Sound backgroundSound = new Sound("Assets/Sounds/mr_clown.mp3", 1, true);
+            Sound backgroundSound = new Sound("Assets/Sounds/supermario.mp3", 1, true);
             Music backgroundMusic = new Music(backgroundSound);
-
             cast.AddActor("backgroundMusic", backgroundMusic);
+            cast.AddActor("backgroundMusic", backgroundMusic);     
 
 
             // Create and add Lives to cast
             Text lifeText = new Text(Constants.LIVES_FORMAT, Constants.FONT_FILE, Constants.FONT_SIZE, Constants.ALIGN_RIGHT, Constants.WHITE);
             Point lifePosition = new Point(Constants.SCREEN_WIDTH - Constants.HUD_MARGIN, Constants.HUD_MARGIN);
             Label lifeLabel = new Label(lifeText, lifePosition);
-            cast.AddActor(Constants.LIVES_GROUP, lifeLabel);
+            // cast.AddActor(Constants.LIVES_GROUP, lifeLabel);
 
             // Create and add score to cast
             Text scoreText = new Text(Constants.SCORE_FORMAT, Constants.FONT_FILE, Constants.FONT_SIZE, Constants.ALIGN_CENTER, Constants.WHITE);
@@ -100,17 +145,18 @@ namespace OnWard
             script.AddAction(Constants.INITIALIZE, new InitializeDevicesAction(AudioService, VideoService));
             script.AddAction(Constants.LOAD, new LoadAssetsAction(AudioService, VideoService));
             
-            script.AddAction(Constants.INPUT, new ControlPlayerAction(KeyboardService));
+            script.AddAction(Constants.INPUT, new ControlPlayerAction(KeyboardService, AudioService));
             
             script.AddAction(Constants.UPDATE, new UpdateBackgroundAction());
+            script.AddAction(Constants.UPDATE, new PlayerObstacleCollisionAction(PhysicsService, AudioService));
             script.AddAction(Constants.UPDATE, new UpdateObstacleAction());
             script.AddAction(Constants.UPDATE, new MovePlayerAction());
             
             script.AddAction(Constants.OUTPUT, new PlayMusicAction(AudioService));
             script.AddAction(Constants.OUTPUT, new StartDrawingAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawBackgroundAction(VideoService));
-            script.AddAction(Constants.OUTPUT, new DrawObstacleAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawPlayerAction(VideoService));
+            script.AddAction(Constants.OUTPUT, new DrawObstacleAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawHudAction(VideoService));
             script.AddAction(Constants.OUTPUT, new EndDrawingAction(VideoService));
 

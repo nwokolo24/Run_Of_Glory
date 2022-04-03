@@ -86,5 +86,10 @@ namespace OnWard.Game.Casting
 
             return filename; 
         }
+
+        public string GetFilename()
+        {
+            return images[0];
+        }
     }
 }
