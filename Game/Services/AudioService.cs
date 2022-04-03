@@ -19,7 +19,7 @@ namespace OnWard.Game.Services
         /// Plays the given sound.
         /// </summary>
         /// <param name="sound">The given sound.</param>
-        void PlaySound(Sound sound);
+        void PlaySound(Sound sound, int volume = 1);
 
         /// <summary>
         /// Releases the audio device.

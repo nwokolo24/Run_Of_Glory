@@ -24,7 +24,7 @@ namespace OnWard.Game.Scripts
                 {
                     audioService.PlaySound(music.sound);
                     this.backgroundPlaying = true;
-                    // cast.RemoveActor("backgroundMusic", music);
+                    cast.RemoveActor("backgroundMusic", music);
                 }
 
             }  

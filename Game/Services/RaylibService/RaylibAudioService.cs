@@ -39,7 +39,7 @@ namespace OnWard.Game.Services.RaylibService
         // }
  
         /// </inheritdoc>
-        public void PlaySound(Casting.Sound sound)
+        public void PlaySound(Casting.Sound sound, int volume)
         {
                 
            try {
@@ -49,6 +49,9 @@ namespace OnWard.Game.Services.RaylibService
                 {
                     this.sounds[filename] = Raylib.LoadSound(filename);
                 }
+
+                // Set Sound volume
+                Raylib.SetSoundVolume(sounds[filename], volume);
 
                 // Play!
                 Raylib.PlaySound(sounds[filename]);

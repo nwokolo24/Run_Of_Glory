@@ -113,11 +113,10 @@ namespace OnWard
             Player player = new Player(body, animation);
             cast.AddActor("player", player);
 
-            // Create and add Background musice to cast
-            Sound backgroundSound = new Sound("Assets/Sounds/supermario.mp3", 1, true);
+            // Create and add Background music to cast
+            Sound backgroundSound = new Sound("Assets/Sounds/backg1.mp3", 1, true);
             Music backgroundMusic = new Music(backgroundSound);
             cast.AddActor("backgroundMusic", backgroundMusic);
-            cast.AddActor("backgroundMusic", backgroundMusic);     
 
 
             // Create and add Lives to cast

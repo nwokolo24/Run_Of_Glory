@@ -28,9 +28,9 @@ namespace OnWard.Game.Scripts
 
                 if (physicsService.HasCollided(obstacleBody, playerBody))
                 {
-                    Sound sound = new Sound(Constants.COLLIDE_SOUND);
-                    Sound magicBox = new Sound("Assets/Sounds/magic_box.wav");
-                    Sound lossPoint = new Sound("Assets/Sounds/losspoint.wav");
+                    Sound sound = new Sound(Constants.COLLIDE_SOUND, 5);
+                    Sound magicBox = new Sound("Assets/Sounds/magic_box.wav", 5);
+                    Sound lossPoint = new Sound("Assets/Sounds/losspoint.wav", 5);
                     int points = obstacle.GetObstacleValue();
                     stats.AddPoints(points);
 
