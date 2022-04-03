@@ -31,15 +31,32 @@ namespace OnWard.Game.Services.RaylibService
                 sounds[filepath] = sound;
             }
         }
+
+        // private void LoadSounds(string path) 
+        // {
+        //     Raylib_cs.Sound sound = Raylib.LoadSound(path);
+        //     sounds[path] = sound;
+        // }
  
         /// </inheritdoc>
         public void PlaySound(Casting.Sound sound)
         {
-            string filename = sound.GetFilename();
-            if (sounds.ContainsKey(filename))
-            {
-                Raylib_cs.Sound raylibSound = sounds[filename];
-                Raylib.PlaySound(raylibSound);
+                
+           try {
+                string filename = sound.GetFilename();
+                //Determine whether to pull from the cache or load new
+                if (!this.sounds.ContainsKey(filename))
+                {
+                    this.sounds[filename] = Raylib.LoadSound(filename);
+                }
+
+                // Play!
+                Raylib.PlaySound(sounds[filename]);
+
+            }
+            catch (Exception e) {
+                // In case path is not found...
+                Console.WriteLine(e.Message);
             }
         }
 

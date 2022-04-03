@@ -8,6 +8,7 @@ namespace OnWard.Game.Scripts
 {
     public class UpdateObstacleAction : Action
     {
+        private static Random random = new Random();
         public UpdateObstacleAction()
         {
         }
@@ -23,11 +24,32 @@ namespace OnWard.Game.Scripts
             foreach (Actor actor in obstacles)
             {
                 Image image = (Image)actor;
+
                 image.Move();
-                if (image.GetPosition().GetX() <= -1600)
+
+                if (image.GetPosition().GetX() <= -0)
                 {
-                    Point newPosition = new Point(1600, 700);
-                    image.SetPosition(newPosition);
+                    if (image.GetFilename() == "Assets/Images/magic_box.png")
+                    {
+                        Point newPosition = new Point(random.Next(1800, 2100), random.Next(200, 700));
+                        image.SetPosition(newPosition);
+                    }
+                    else if (image.GetFilename() == "Assets/Images/santa.png")
+                    {
+                        Point newPosition = new Point(random.Next(1700, 1900), random.Next(500, 700));
+                        image.SetPosition(newPosition);
+                    }
+                    else if (image.GetFilename() == "Assets/Images/gift_box.png")
+                    {
+                        Point newPosition = new Point(random.Next(1650, 1850), random.Next(450, 700));
+                        image.SetPosition(newPosition);
+                    }
+                    else
+                    {
+                        Point newPosition = new Point(random.Next(1600, 3000), 700);
+                        image.SetPosition(newPosition);
+                    }
+                    
                 }
             }
         }

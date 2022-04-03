@@ -10,28 +10,28 @@ namespace OnWard.Game.Casting
     /// </summary>
     public class Stats : Actor
     {
-        private int level;
+        // private int level;
         private int lives;
         private int score;
 
         /// <summary>
         /// Constructs a new instance of Actor.
         /// </summary>
-        public Stats(int level = 1, int lives = 3, int score = 0, 
+        public Stats(int lives = 3, int score = 0, 
                 bool debug = false) : base(debug)
         {
-            this.level = level;
+            // this.level = level;
             this.lives = lives;
             this.score = score;
         }
 
-        /// <summary>
-        /// Adds one level.
-        /// </summary>
-        public void AddLevel()
-        {
-            level++;
-        }
+        // /// <summary>
+        // /// Adds one level.
+        // /// </summary>
+        // public void AddLevel()
+        // {
+        //     level++;
+        // }
 
         /// <summary>
         /// Adds an extra life.
@@ -50,14 +50,14 @@ namespace OnWard.Game.Casting
             score += points;
         }
 
-        /// <summary>
-        /// Gets the level.
-        /// </summary>
-        /// <returns>The level.</returns>
-        public int GetLevel()
-        {
-            return level;
-        }
+        // /// <summary>
+        // /// Gets the level.
+        // /// </summary>
+        // /// <returns>The level.</returns>
+        // public int GetLevel()
+        // {
+        //     return level;
+        // }
 
         /// <summary>
         /// Gets the lives.
